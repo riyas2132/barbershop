@@ -1,686 +1,235 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>E-Commerce Product Listing</title>
-    <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
-	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
-    <!-- Bootstrap Icons -->
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.7.2/font/bootstrap-icons.css">
-    <style>
-        
-		:root {
-    --primary-color: #1976D2;
-    --secondary-color: #E3F2FD;
-    --accent-color: #FFFFFF;
-}
-
-		body {
-    background-color: var(--secondary-color);
-    color: var(--primary-color);
-}
-        .custom-header {
-    background-color: var(--primary-color);
-}
-
-        .custom-header .navbar-brand {
-    color: var(--accent-color);
-}
-        .product-card {
-            height: 100%;
-            transition: transform 0.3s ease;
-            background-color: #FFFFFF;
-        }
-        .product-card:hover {
-            transform: translateY(-5px);
-        }
-        .product-image {
-            height: 200px;
-            object-fit: cover;
-        }
-        
-		#cartButton {
-    position: fixed;
-    bottom: 20px;
-    right: 20px;
-    z-index: 1000;
-    background-color: #4a4a4a;
-    border-color: #4a4a4a;
-    color: #ffffff;
-    font-weight: bold;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
-    transition: all 0.3s ease;
-    padding: 10px 20px;
-    font-size: 1.1em;
-}
-
-#cartButton:hover {
-    background-color: #333333;
-    border-color: #333333;
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
-}
-		
-        .quantity-control {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-        .quantity-input {
-            width: 40px;
-            text-align: center;
-            border: none;
-            background-color: transparent;
-        }
-        .footer {
-    background-color: var(--primary-color);
-    color: var(--accent-color);
-}
-        .product-heading {
-            font-size: 1.5em;
-            text-align: left;
-            margin-bottom: 15px;
-            color: #dbd08c;
-        }
-            .btn-outline-secondary {
-        padding: 0.375rem 0.75rem;
-    }
-	.quantity-display {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        min-width: 60px;
-        height: 100%;
-    }
-        .btn-outline-secondary:hover {
-    color: var(--accent-color);
-    background-color: var(--primary-color);
-}
-       .footer .section {
-            flex: 1;
-            padding: 20px;
-            min-width: 200px;
-        }
-        .footer .section h3 {
-            margin-top: 0;
-        }
-        .footer .social-icons {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: left;
-        }
-        .footer .social-icons li {
-            margin: 0 10px;
-        }
-        .footer .social-icons a {
-            color: white;
-            text-decoration: none;
-            font-size: 24px;
-        }
-  #loading-overlay {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(255, 255, 255, 0.8);
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    z-index: 9999;
-}
-
-.spinner-border {
-    width: 3rem;
-    height: 3rem;
-}   
-.out-of-stock {
-        opacity: 0.7;
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sales Details</title>
+  <style>
+    :root {
+      --primary-color: #4285F4;
+      --secondary-color: #34A853;
+      --accent-color: #EA4335;
+      --light-gray: #f5f5f5;
+      --medium-gray: #e0e0e0;
+      --dark-gray: #757575;
+      --text-color: #333;
+      --white: #ffffff;
     }
     
-    .out-of-stock img {
-        filter: grayscale(100%);
+    body {
+      font-family: 'Roboto', Arial, sans-serif;
+      background: var(--light-gray);
+      padding: 20px;
+      color: var(--text-color);
+      line-height: 1.6;
     }
     
-    .out-of-stock .card-body {
-        position: relative;
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 20px;
+      background: var(--white);
+      border-radius: 8px;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
     }
     
-    .text-danger.fw-bold {
-        font-size: 1.2em;
-        margin-top: auto;
-    }    
-    </style>
+    h1 {
+      text-align: center;
+      color: var(--primary-color);
+      margin-bottom: 30px;
+      font-weight: 500;
+      padding-bottom: 15px;
+      border-bottom: 1px solid var(--medium-gray);
+    }
+    
+    table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 20px;
+      background: var(--white);
+      box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    }
+    
+    th, td {
+      border: 1px solid var(--medium-gray);
+      padding: 15px;
+      text-align: left;
+    }
+    
+    th {
+      background-color: var(--primary-color);
+      color: var(--white);
+      font-weight: 500;
+      text-transform: uppercase;
+      font-size: 0.9em;
+      letter-spacing: 0.5px;
+    }
+    
+    tr:nth-child(even) {
+      background-color: var(--light-gray);
+    }
+    
+    tr:hover {
+      background-color: rgba(66, 133, 244, 0.1);
+    }
+    
+    .loader-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 200px;
+    }
+    
+    .loader {
+      border: 5px solid var(--light-gray);
+      border-radius: 50%;
+      border-top: 5px solid var(--primary-color);
+      width: 50px;
+      height: 50px;
+      animation: spin 1s linear infinite;
+    }
+    
+    @keyframes spin {
+      0% { transform: rotate(0deg); }
+      100% { transform: rotate(360deg); }
+    }
+    
+    .job-list {
+      margin: 0;
+      padding-left: 20px;
+    }
+    
+    .job-list li {
+      margin-bottom: 5px;
+    }
+    
+    .amount {
+      font-weight: bold;
+      color: var(--secondary-color);
+    }
+    
+    .date {
+      white-space: nowrap;
+      color: var(--dark-gray);
+    }
+    
+    @media (max-width: 768px) {
+      table {
+        display: block;
+        overflow-x: auto;
+      }
+      
+      th, td {
+        padding: 10px;
+      }
+    }
+    
+    .status-message {
+      text-align: center;
+      padding: 20px;
+      color: var(--accent-color);
+      font-weight: 500;
+    }
+  </style>
 </head>
 <body>
-	<div id="loading-overlay">
-    <div class="spinner-border text-primary" role="status">
-        <span class="visually-hidden">Loading...</span>
+  <div class="container">
+    <h1>Google Sheet Data Viewer</h1>
+    
+    <div id="loader" class="loader-container">
+      <div class="loader"></div>
     </div>
-	</div>
-    <!-- Updated Header -->
-    <header class="custom-header">
-    <nav class="navbar">
-        <div class="container d-flex justify-content-between align-items-center">
-            <a class="navbar-brand" href="#">Shop Name</a>
-            <div class="header-buttons d-flex align-items-center">
-				<a href="tel:" id="callButton" class="btn btn-primary me-3" title="Call us">
-				<i class="bi bi-telephone-fill fs-4"></i>
-				</a>
-				<a href="https://wa.me/" id="whatsappButton" class="btn btn-success me-3" target="_blank" title="Chat on WhatsApp">
-				<i class="bi bi-whatsapp fs-4"></i>
-				</a>
-				<a href="https://www.google.com/maps/dir/?api=1&destination=Facts+Computer+Software+House+LLC&origin=Facts+Computer+Software+House+LLC" id="glocation" class="btn btn-secondary" target="_blank" title="Location">
-				<i class="bi bi-geo-alt-fill fs-4"></i>
-				</a>
-			</div>
-
-        </div>
-    </nav>
-</header>
-
-    <div class="container py-4">
-        <h2 class="product-heading">Our Products</h2>
-        <div id="productCategories" class="mb-4">
-            <!-- Categories will be inserted here -->
-        </div>
-        <div class="input-group mb-4">
-            <input type="text" class="form-control" placeholder="Search products..." id="searchInput">
-            <button class="btn btn-outline-secondary" type="button" onclick="filterProducts()">Search</button>
-        </div>
-        <div id="productGrid" class="row row-cols-2 row-cols-md-2 row-cols-lg-4 g-4">
-            <!-- Products will be inserted here -->
-        </div>
-    </div>
-    <button id="cartButton" class="btn btn-primary btn-lg" style="display: none;">Proceed to Cart</button>
-
-    <!-- Cart Modal -->
-    <div class="modal fade" id="cartModal" tabindex="-1" aria-labelledby="cartModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="cartModalLabel">Your Cart</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body" id="cartModalBody">
-                <!-- Cart contents will be inserted here -->
-            </div>
-			<div class="form-group mt-3">
-                <label for="addressInput" class="form-label">Delivery Address (Optional):</label>
-                <textarea class="form-control" id="addressInput" rows="3" placeholder="Enter your delivery address (optional)"></textarea>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-danger" id="clearCartButton" onclick="clearCart()">Clear Cart</button>
-                <button type="button" class="btn btn-primary" id="proceedToWhatsApp">Proceed to WhatsApp</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-    <!-- Footer -->
-    <footer class="footer mt-auto py-3">
-        <div class="container">
-            <div class="row">
-                <div class="col-md-4">
-                    <h5>About Us</h5>
-                    <p>Shop Name is dedicated to providing high-quality products and excellent customer service.</p>
-                </div>
-                <div class="col-md-4">
-                    <h5>Contact</h5>
-                    <p>Email: info@yourshop.com<br>Phone: +1 234 567 8900</p>
-                </div>
-				<div class="col-md-4">
-                   <h5>Follow Us</h5> 
-                <ul class="social-icons">
-                    <li><a id="facebookLink"  href="https://www.facebook.com" target="_blank"><i class="fab fa-facebook-f"></i></a></li>
-                    <li><a id="twitterLink"  href="https://www.twitter.com" target="_blank"><i class="fab fa-twitter"></i></a></li>
-                    <li><a id="instagramLink"  href="https://www.instagram.com" target="_blank"><i class="fab fa-instagram"></i></a></li>
-                    <li><a id="linkedinLink"  href="https://www.linkedin.com" target="_blank"><i class="fab fa-linkedin-in"></i></a></li>
-                </ul> 
-                </div>
-            </div>
-            <hr>
-            <div class="row">
-                <div class="col-md-12 text-center">
-                    <p>&copy; 2024 Shop Name. All rights reserved.</p>
-                </div>
-            </div>
-        </div>
-    </footer>
-
-    <!-- Bootstrap JS and Popper.js -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="https://apis.google.com/js/api.js"></script>
-    <script>
-	function debounce(func, wait) {
-    let timeout;
-    return function(...args) {
-        clearTimeout(timeout);
-        timeout = setTimeout(() => func.apply(this, args), wait);
-    };
-}
-		showLoading();
-		function showLoading() {
-    document.getElementById('loading-overlay').style.display = 'flex';
-}
-function hideLoading() {
-    document.getElementById('loading-overlay').style.display = 'none';
-}
-        // Replace with your Google Sheets API key
-        const API_KEY = 'AIzaSyByyiuwuJBysKl2xtvl6wCw6Gz9shyDzXs';
-        // Replace with your Google Sheet ID
-        const SHEET_ID = '1JziliJ6oVkgMlm-Aa2jMc2s4LBSgHpZCoEaXTd9u9s0';
-        // Replace with your sheet name and extend the range to include columns R and S
-        const SHEET_NAME = 'Aquarium!A:S';
-
-        let cart = {};
-        let products = [];
-        let categories = [];
-        let shopName = 'Shop Name'; // Default value
-        let shopEmail = 'info@yourshop.com'; // Default value
-        let Phone = '000000'; // Default value
-		let Facebook = 'https://www.facebook.com'; // Default value
-		let Twitter = 'https://www.twitter.com'; // Default value
-		let Instagram = 'https://www.instagram.com'; // Default value
-		let Linkedin = 'https://www.linkedin.com'; // Default value
-		let Location = ''; // Default value
-
-        function initClient() {
-    showLoading(); // Show loading animation
-    gapi.client.init({
-        'apiKey': API_KEY,
-        'discoveryDocs': ["https://sheets.googleapis.com/$discovery/rest?version=v4"],
-    }).then(function () {
-        loadSheetsData();
-    }, function (error) {
-        console.log('Error initializing GAPI client: ' + error);
-        hideLoading(); // Hide loading animation in case of error
-    });
-}
-
-
-
-function loadSheetsData() {
-    gapi.client.sheets.spreadsheets.values.get({
-        spreadsheetId: SHEET_ID,
-        range: SHEET_NAME
-    }).then(function (response) {
-        const data = response.result.values;
-        const productGrid = document.getElementById('productGrid');
-
-        // Initialize variables for color customization
-        let primaryColor = '#1976D2'; // Default primary color
-        let secondaryColor = '#E3F2FD'; // Default secondary color
-        let accentColor = '#FFFFFF'; // Default accent color
-
-        // Skip the first row (header) and start from the second row
-        for (let i = 1; i < data.length; i++) {
-            const row = data[i];
-            if (row[17] === 'ShopName') {
-                shopName = row[18];
-                updateShopName();
-            }
-            if (row[17] === 'Email') {
-                shopEmail = row[18];
-            }
-            if (row[17] === 'Phone') {
-                Phone = row[18];
-            }
-            if (row[17] === 'Location') {
-                Location = row[18];
-            }
-            if (row[17] === 'Facebook') {
-                Facebook = row[18];
-            }
-            if (row[17] === 'Twitter') {
-                Twitter = row[18];
-            }
-            if (row[17] === 'Instagram') {
-                Instagram = row[18];
-            }
-            if (row[17] === 'Linkedin') {
-                Linkedin = row[18];
-            }
-            if (row[17] === 'Colour') {
-                [primaryColor, secondaryColor, accentColor] = row[18].split(',');
-                updateColors(primaryColor, secondaryColor, accentColor);
-            }
-            updateShopEmailPhone();
-            updateSocialMedia(Facebook, Twitter, Instagram, Linkedin);
-        }
-
-        // Process product data starting from the second row
-        for (let i = 1; i < data.length; i++) {
-            const row = data[i];
-            if (row[0] && row[1] && row[2]) {
-                products.push({ 
-                    code: row[0], 
-                    price: parseFloat(row[1]), 
-                    oldPrice: parseFloat(row[4]), 
-                    image: row[2], 
-                    category: row[3],
-					kg: parseFloat(row[5]) || 1, // New KG value, default to 1 if not provided		
-					stock: parseInt(row[6]) || 0					
-                });
-                if (!categories.includes(row[3])) {
-                    categories.push(row[3]);
-                }
-                const productCard = createProductCard(products.length - 1);
-                productGrid.appendChild(productCard);
-            }
-        }
-
-        renderCategories();
-        hideLoading(); // Hide loading animation when data is loaded and rendered
-    }, function (response) {
-        console.error('Error: ' + response.result.error.message);
-        hideLoading(); // Hide loading animation in case of error
-    });
-}
-
-
-function updateColors(primaryColor, secondaryColor, accentColor) {
-    document.documentElement.style.setProperty('--primary-color', primaryColor);
-    document.documentElement.style.setProperty('--secondary-color', secondaryColor);
-    document.documentElement.style.setProperty('--accent-color', accentColor);
-
-    // Update inline styles if necessary
-    document.querySelector('.custom-header').style.backgroundColor = primaryColor;
-    document.querySelector('.navbar-brand').style.color = accentColor;
-    document.querySelector('body').style.backgroundColor = secondaryColor;
-    document.querySelector('body').style.color = primaryColor;
-    document.querySelectorAll('.product-heading, .btn-outline-secondary').forEach(element => {
-        element.style.color = primaryColor;
-        element.style.borderColor = primaryColor;
-    });
-    document.querySelectorAll('.btn-outline-secondary:hover').forEach(element => {
-        element.style.color = accentColor;
-        element.style.backgroundColor = primaryColor;
-    });
-    document.querySelector('.footer').style.backgroundColor = primaryColor;
-    document.querySelector('.footer').style.color = accentColor;
-}
-
-
-        
-		// Update the createProductCard function to display KG information
-function createProductCard(index) {
-    const product = products[index];
-    const isOutOfStock = product.stock === 0;
-    const productCard = document.createElement('div');
-    productCard.className = 'col';
-    productCard.innerHTML = 
-        `<div class="card h-100 product-card ${isOutOfStock ? 'out-of-stock' : ''}">
-            <img src="${product.image}" class="card-img-top product-image" alt="${product.code}">
-            <div class="card-body d-flex flex-column">
-                <h5 class="card-title">${product.code}</h5>
-                <p class="card-text">
-                    ${product.oldPrice > product.price ? 
-                        `<span style="color: red;" class="text-decoration-line-through">AED ${product.oldPrice.toFixed(2)}</span><br>` : 
-                        ''}
-                    <span class="text-primary fw-bold">
-                        AED ${product.price.toFixed(2)}
-                        ${product.kg && product.kg !== 1 ? `/Kg` : ''}
-                    </span>
-                </p>
-                ${isOutOfStock ? 
-                    '<p class="text-danger fw-bold">Out of Stock</p>' :
-                    `<div class="mt-auto">
-                        <div class="d-flex align-items-center">
-                            <button class="btn btn-outline-secondary" type="button" onclick="changeQuantity(${index}, -1)">
-                                <i class="bi bi-dash"></i>
-                            </button>
-                            <div class="mx-2 text-center" style="min-width: 60px;">
-                                <span id="quantity-${index}">${cart[index] || 0}</span>
-                            </div>
-                            <button class="btn btn-outline-secondary" type="button" onclick="changeQuantity(${index}, 1)">
-                                <i class="bi bi-plus"></i>
-                            </button>
-                        </div>
-                    </div>`
-                }
-            </div>
-        </div>`;
-    return productCard;
-}
-
-        function renderCategories() {
-    const categoryContainer = document.getElementById('productCategories');
-    categoryContainer.innerHTML = 
-        `<button class="btn btn-primary m-1" onclick="setCategoryAndFilter('All')">All</button>
-        ${categories.map(category => 
-            `<button class="btn btn-outline-secondary m-1" onclick="setCategoryAndFilter('${category}')">${category}</button>`
-        ).join('')}`;
-}
-
-        function filterProducts() {
-    const searchInput = document.getElementById('searchInput').value.toLowerCase();
-    const currentCategory = document.querySelector('#productCategories .btn-primary').textContent;
-    const productGrid = document.getElementById('productGrid');
-    productGrid.innerHTML = '';
-
-    products.forEach((product, index) => {
-        const matchesCategory = currentCategory === 'All' || product.category === currentCategory;
-        const matchesSearch = product.code.toLowerCase().includes(searchInput);
-
-        if (matchesCategory && matchesSearch) {
-            const productCard = createProductCard(index);
-            productGrid.appendChild(productCard);
-        }
-    });
-}
-function setCategoryAndFilter(category) {
-    const buttons = document.querySelectorAll('#productCategories .btn');
-    buttons.forEach(btn => {
-        btn.classList.remove('btn-primary');
-        btn.classList.add('btn-outline-secondary');
-    });
-    event.target.classList.remove('btn-outline-secondary');
-    event.target.classList.add('btn-primary');
-    filterProducts();
-}
-        function updateShopName() {
-            // Update shop name in navbar
-            document.querySelector('.navbar-brand').textContent = shopName;
-
-            // Update shop name in footer
-            document.querySelector('.footer h5').textContent = 'About ' + shopName;
-            document.querySelector('.footer p').textContent = shopName + ' is dedicated to providing high-quality products and excellent customer service.';
-            document.querySelector('.footer .text-center p').textContent = '© 2024 ' + shopName + '. All rights reserved.';
-        }
-
-        function updateShopEmailPhone() {
-            // Update shop email in footer
-            document.querySelector('.footer .col-md-4:nth-child(2) p').innerHTML = `Email: ${shopEmail}<br>Phone: ${Phone}`;
-            document.getElementById('callButton').href = `tel:+${Phone}`;
-            document.getElementById('whatsappButton').href = `https://wa.me/${Phone}`;
-			document.getElementById('glocation').href = `${Location}`;
-        }
-        function updateSocialMedia(Facebook,Twitter,Instagram,Linkedin) {
-			document.getElementById('facebookLink').href = Facebook; 
-			document.getElementById('twitterLink').href = Twitter; 
-			document.getElementById('instagramLink').href = Instagram; 
-			document.getElementById('linkedinLink').href = Linkedin; 
-			 
-			}
-
-function changeQuantity(index, change) {
-    const product = products[index];
     
-    // Check if product is out of stock
-    if (product.stock === 0) {
-        return; // Do nothing if out of stock
-    }
+    <div id="status" class="status-message" style="display:none;"></div>
     
-    const kgIncrement = product.kg;
-    const quantitySpan = document.getElementById(`quantity-${index}`);
-    const modalQuantitySpan = document.getElementById(`modal-quantity-${index}`);
-    
-    let currentQuantity = cart[index] || 0;
-    let newQuantity = currentQuantity + (change * kgIncrement);
-    
-    // Ensure new quantity doesn't exceed available stock
-    newQuantity = Math.min(Math.max(0, newQuantity), product.stock);
+    <table id="dataTable" style="display:none;">
+      <thead>
+        <tr>
+          <th>Date</th>
+          <th>Name</th>
+          <th>Job</th>
+          <th>Amount</th>
+          <th>Description</th>
+        </tr>
+      </thead>
+      <tbody></tbody>
+    </table>
+  </div>
 
-    if (newQuantity === 0) {
-        delete cart[index];
-    } else {
-        cart[index] = newQuantity;
+  <script>
+    const webAppURL = "https://script.google.com/macros/s/AKfycbzkn2mpb73L1ETlupmzryAeb2oQFho86__ijRsiuj0e47rQiT9_V3hUtdO5RfIgnrCoyQ/exec";
+
+    // Function to format date as dd-MMM-yyyy hh:mm AM/PM
+    function formatDateTime(dateString) {
+      if (!dateString) return "";
+      
+      const date = new Date(dateString);
+      if (isNaN(date.getTime())) return dateString; // Return original if invalid date
+      
+      const day = date.getDate().toString().padStart(2, '0');
+      const monthNames = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
+      const month = monthNames[date.getMonth()];
+      const year = date.getFullYear();
+      
+      let hours = date.getHours();
+      const minutes = date.getMinutes().toString().padStart(2, '0');
+      const ampm = hours >= 12 ? 'PM' : 'AM';
+      hours = hours % 12;
+      hours = hours ? hours : 12; // the hour '0' should be '12'
+      
+      return `${day}-${month}-${year} ${hours}:${minutes} ${ampm}`;
     }
 
-    // Update main product grid
-    if (quantitySpan) {
-        quantitySpan.textContent = newQuantity;
-    }
-
-    // Update cart modal if it's open
-    if (modalQuantitySpan) {
-        modalQuantitySpan.textContent = newQuantity;
-        const itemTotal = product.price * newQuantity;
-        const modalTotalSpan = document.getElementById(`modal-total-${index}`);
-        if (modalTotalSpan) {
-            modalTotalSpan.textContent = `AED ${itemTotal.toFixed(2)}`;
+    fetch(webAppURL)
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
         }
+        return response.json();
+      })
+      .then(data => {
+        const tableBody = document.querySelector("#dataTable tbody");
+        tableBody.innerHTML = ""; // Clear existing rows
 
-        // Recalculate and update grand total
-        let grandTotal = 0;
-        for (const [idx, qty] of Object.entries(cart)) {
-            grandTotal += products[idx].price * qty;
-        }
-        const modalGrandTotal = document.getElementById('modal-grand-total');
-        if (modalGrandTotal) {
-            modalGrandTotal.textContent = `AED ${grandTotal.toFixed(2)}`;
-        }
-    }
+        // Sort data by Date in descending order
+        data.sort((a, b) => {
+          const dateA = new Date(a.Date);
+          const dateB = new Date(b.Date);
+          return dateB - dateA; // descending
+        });
 
-    updateCartButton();
-}
+        data.forEach(row => {
+          // Format date using our custom function
+          const formattedDateTime = formatDateTime(row.Date);
 
-        function updateCartButton() {
-            const cartButton = document.getElementById('cartButton');
-            const totalItems = Object.values(cart).reduce((a, b) => a + b, 0);
-            const totalPrice = Object.entries(cart).reduce((total, [index, quantity]) => {
-                return total + (products[index].price * quantity);
-            }, 0);
+          // Format job as list
+          const jobItems = row.Job ? row.Job.split(",").map(item => item.trim()) : [];
+          const jobListHTML = jobItems.length > 0 
+            ? `<ul class="job-list">${jobItems.map(item => `<li>${item}</li>`).join('')}</ul>`
+            : "";
 
-            if (totalItems > 0) {
-                cartButton.style.display = 'block';
-                cartButton.textContent = `Proceed to Cart (${totalItems} items, AED ${totalPrice.toFixed(2)})`;
-            } else {
-                cartButton.style.display = 'none';
-            }
-        }
+          const tr = document.createElement("tr");
+          tr.innerHTML = `
+            <td class="date">${formattedDateTime}</td>
+            <td>${row.Name || ""}</td>
+            <td>${jobListHTML}</td>
+            <td class="amount">${row.Amount || ""}</td>
+            <td>${row.Description || ""}</td>
+          `;
+          tableBody.appendChild(tr);
+        });
 
-        function clearCart() {
-    cart = {};
-    // Update quantity displays in product cards
-    products.forEach((product, index) => {
-        const quantitySpan = document.getElementById(`quantity-${index}`);
-        if (quantitySpan) {
-            quantitySpan.textContent = '0';
-        }
-    });
-    updateCartButton();
-
-    // Hide the cart modal
-    const cartModal = bootstrap.Modal.getInstance(document.getElementById('cartModal'));
-    if (cartModal) {
-        cartModal.hide();
-    }
-}
-
-
-function showCartModal() {
-    const modalBody = document.getElementById('cartModalBody');
-    let cartContent = '<ul class="list-group">';
-    let total = 0;
-
-    for (const [index, quantity] of Object.entries(cart)) {
-        const product = products[index];
-        const itemTotal = product.price * quantity;
-        total += itemTotal;
-        cartContent += 
-            `<li class="list-group-item d-flex justify-content-between align-items-center">
-                <div>
-                    <button class="btn btn-sm btn-outline-secondary me-2" onclick="changeQuantity(${index}, -1)">-</button>
-                    <span id="modal-quantity-${index}">${quantity}</span>
-                    <button class="btn btn-sm btn-outline-secondary ms-2" onclick="changeQuantity(${index}, 1)">+</button>
-                    ${product.code}  
-                    <span class="text-primary">AED ${product.price.toFixed(2)} ${product.kg && product.kg !== 1 ? `/Kg` : ''}</span>
-                </div>
-                <span id="modal-total-${index}">AED ${itemTotal.toFixed(2)}</span>
-            </li>`;
-    }
-
-    cartContent += 
-        `<li class="list-group-item d-flex justify-content-between align-items-center fw-bold">
-            Total
-            <span id="modal-grand-total">AED ${total.toFixed(2)}</span>
-        </li>
-    </ul>`;
-
-    modalBody.innerHTML = cartContent;
-
-    const cartModal = new bootstrap.Modal(document.getElementById('cartModal'));
-    cartModal.show();
-}
-
-        function searchProducts() {
-    const searchInput = document.getElementById('searchInput').value.toLowerCase();
-    const productCards = document.querySelectorAll('.product-card');
-
-    productCards.forEach((card, index) => {
-        const productName = products[index].code.toLowerCase();
-        if (productName.includes(searchInput)) {
-            card.parentElement.style.display = '';
-        } else {
-            card.parentElement.style.display = 'none';
-        }
-    });
-}
-
-        document.getElementById('cartButton').onclick = function () {
-            if (Object.keys(cart).length > 0) {
-                showCartModal();
-            } else {
-                alert('Your cart is empty!');
-            }
-        };
-
-        document.getElementById('proceedToWhatsApp').onclick = function () {
-        const address = document.getElementById('addressInput').value.trim();
+        document.getElementById("loader").style.display = "none";
+        document.getElementById("dataTable").style.display = "table";
+      })
+      .catch(error => {
+        console.error("Error fetching data:", error);
+        document.getElementById("loader").style.display = "none";
         
-        let message = "I'd like to order the following items:\n\n";
-        let total = 0;
-        for (const [index, quantity] of Object.entries(cart)) {
-            const product = products[index];
-            const itemTotal = product.price * quantity;
-            total += itemTotal;
-            message += `${quantity}x ${product.code} - AED ${product.price.toFixed(2)} each = AED ${itemTotal.toFixed(2)}\n`;
-        }
-        message += `\nTotal: AED ${total.toFixed(2)}`;
-        
-        // Only add address to message if one was provided
-        if (address) {
-            message += `\n\nDelivery Address:\n${address}`;
-        }
-        
-        message += "\n\nPlease confirm my order. Thank you!";
-
-        const encodedMessage = encodeURIComponent(message);
-        const whatsappLink = `https://wa.me/${Phone}?text=${encodedMessage}`;
-
-        window.open(whatsappLink, '_blank');
-
-        clearCart();
-    };
-
-        gapi.load('client', initClient);
-		document.getElementById('searchInput').oninput = debounce(filterProducts, 300);
-    </script>
+        const statusElement = document.getElementById("status");
+        statusElement.textContent = "Failed to load data. Please try again later.";
+        statusElement.style.display = "block";
+      });
+  </script>
 </body>
 </html>
